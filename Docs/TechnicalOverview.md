@@ -14,7 +14,7 @@
 
 | Product                 | Usage                                        |
 |-------------------------|----------------------------------------------|
-| Unity 2019.4.11f1 (LTS) | Game Engine & Editor                         |
+| Unity 2021.3.17f1 (LTS) | Game Engine & Editor                         |
 | Git                     | Versioning                                   |
 | Blender 2.8+            | Modeling, Rigging, Animating                 |
 | Adobe CC                | Concept Art, Painting, Texturing, UI         |
