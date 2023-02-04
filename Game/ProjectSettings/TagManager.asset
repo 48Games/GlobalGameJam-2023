@@ -9,6 +9,7 @@ TagManager:
   - Anvil
   - Lobby
   - BtnGo
+  - inputManager
   layers:
   - Default
   - TransparentFX

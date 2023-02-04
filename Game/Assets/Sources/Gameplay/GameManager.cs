@@ -17,11 +17,12 @@ public class GameManager : MonoBehaviour
     List<GameObject> playerDead = new();
     GameState state = GameState.BEGIN;
     private bool spawningAnvil = false;
+    private PlayerInputManager playerInputManager = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerInputManager = GameObject.FindGameObjectWithTag("inputManager").GetComponent<PlayerInputManager>();
     }
 
     // Update is called once per frame
@@ -124,10 +125,11 @@ public class GameManager : MonoBehaviour
         players.Add(player);
     }
 
-    public void OnPlayerJoined(PlayerInput playerInput)
-    {
-        playerInput.GetComponent<Player>().SetupPlayer(playerInput.playerIndex);
-    }
+
+    //public void OnPlayerJoined(PlayerInput playerInput)
+    //{
+    //    playerInput.GetComponent<Player>().SetupPlayer(playerInput.playerIndex);
+    //}
 
     
 

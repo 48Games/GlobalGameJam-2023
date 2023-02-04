@@ -45,40 +45,29 @@ public partial class @UIControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Move"",
+                    ""action"": ""Play"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6dc78160-8b88-453d-b9c5-f77cec7f704f"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""id"": ""c97e15f5-ac80-46e4-9ce2-ea0ee959af2c"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Dash"",
+                    ""groups"": ""Keyboad and mouse"",
+                    ""action"": ""Play"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""9c599ad5-ca68-4a6d-9783-919943c7dc3b"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": ""StickDeadzone(min=1.401298E-45,max=1.5)"",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""80a4330f-04b1-4698-8c15-c30d128974d8"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""id"": ""62472827-9854-45a8-8ab4-57c1fb28fa80"",
+                    ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Shoot"",
+                    ""groups"": """",
+                    ""action"": ""Play"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -86,6 +75,22 @@ public partial class @UIControls : IInputActionCollection2, IDisposable
         }
     ],
     ""controlSchemes"": [
+        {
+            ""name"": ""Keyboad and mouse"",
+            ""bindingGroup"": ""Keyboad and mouse"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        },
         {
             ""name"": ""Gamepad"",
             ""bindingGroup"": ""Gamepad"",
@@ -189,7 +194,16 @@ public partial class @UIControls : IInputActionCollection2, IDisposable
             }
         }
     }
-    public PlayerActions @Player => new PlayerActions(this);
+    public PayerMenuActions @PayerMenu => new PayerMenuActions(this);
+    private int m_KeyboadandmouseSchemeIndex = -1;
+    public InputControlScheme KeyboadandmouseScheme
+    {
+        get
+        {
+            if (m_KeyboadandmouseSchemeIndex == -1) m_KeyboadandmouseSchemeIndex = asset.FindControlSchemeIndex("Keyboad and mouse");
+            return asset.controlSchemes[m_KeyboadandmouseSchemeIndex];
+        }
+    }
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {

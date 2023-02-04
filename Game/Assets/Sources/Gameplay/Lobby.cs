@@ -18,7 +18,6 @@ public class Lobby:MonoBehaviour
 
     public void OnPlayerJoin( GameObject player)
     {
-        Debug.Log("Player Joined");
         player.transform.position = GetPosition(playernumber);
         players[playernumber] = player;
         playernumber++;
