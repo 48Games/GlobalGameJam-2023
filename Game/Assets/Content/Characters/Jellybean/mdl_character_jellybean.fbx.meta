@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: body_parts
-    second: {fileID: 2100000, guid: 663a5760e80ad7f4e94dd1ec8786fbfd, type: 2}
+    second: {fileID: 2100000, guid: f008bb992e6247c45b41a4a98e9fda3a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: colored_parts
-    second: {fileID: 2100000, guid: f008bb992e6247c45b41a4a98e9fda3a, type: 2}
+    second: {fileID: 2100000, guid: 663a5760e80ad7f4e94dd1ec8786fbfd, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -43,9 +43,67 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|anim_idle
-      takeName: Armature|anim_idle
-      internalID: 1031400529529734305
+      name: mdl_character_skeleton|anim_attack
+      takeName: mdl_character_skeleton|anim_attack
+      internalID: 9000277693519134791
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: mdl_character_skeleton|anim_dash
+      takeName: mdl_character_skeleton|anim_dash
+      internalID: -2631475766681894714
+      firstFrame: 0
+      lastFrame: 70
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: mdl_character_skeleton|anim_idle
+      takeName: mdl_character_skeleton|anim_idle
+      internalID: 1450361862955222240
       firstFrame: 0
       lastFrame: 20
       wrapMode: 0
@@ -72,9 +130,38 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|anim_run
-      takeName: Armature|anim_run
-      internalID: -3443933021407251104
+      name: mdl_character_skeleton|anim_rooted
+      takeName: mdl_character_skeleton|anim_rooted
+      internalID: 3580412248798302512
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: mdl_character_skeleton|anim_run
+      takeName: mdl_character_skeleton|anim_run
+      internalID: 7817285369461451468
       firstFrame: 0
       lastFrame: 20
       wrapMode: 0
@@ -156,7 +243,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.002
+    globalScale: 0.2
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
