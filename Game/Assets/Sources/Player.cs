@@ -6,9 +6,6 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    // IMPLEM DASH:
-    // PENSER IMPLEM ROTA
-    // dash direction deplacement si mouvement, rotation si immobile
     public float speed;
     public AnimationCurve animationCurve;
     public float dashCooldown;
@@ -22,6 +19,7 @@ public class Player : MonoBehaviour
     private float currentDashCooldown = 0;
     private float dashAnimationPoint = 0;
     private bool inDash = false;
+    private bool stopped = false;
 
     // Start is called before the first frame update
     void Start()
@@ -50,28 +48,55 @@ public class Player : MonoBehaviour
                 // end of the dash
                 speedMultiplicator = 1;
                 inDash = false;
+                if(stopped)
+                {
+                    stopped = false;
+                    velocity = Vector2.zero;
+                }
             }
             else
             {
                 speedMultiplicator = animationCurve.Evaluate(dashAnimationPoint);
             }
         }
-        controller.Move(new Vector3(velocity.x,0, velocity.y) * speed * speedMultiplicator * Time.deltaTime);
+        controller.Move(new Vector3(velocity.x,0, velocity.y).normalized * speed * speedMultiplicator * Time.deltaTime);
     }
 
     public void Move(InputAction.CallbackContext context)
     {
-        velocity = context.ReadValue<Vector2>();
+        if(!inDash)
+        {
+            velocity = context.ReadValue<Vector2>();
+        } else if (context.ReadValue<Vector2>() == Vector2.zero)
+        {
+            stopped = true;
+        } else
+        {
+            stopped = false;
+        }
     }
 
     public void Dash(InputAction.CallbackContext context)
     {
-        Debug.Log("OK");
         if(currentDashCooldown == 0)
         {
             currentDashCooldown = dashCooldown;
             dashAnimationPoint = 0;
             inDash = true;
+            if(velocity.x == 0 && velocity.y == 0)
+            {
+                // Immobile
+                velocity = transform.forward;
+            }
+        }
+    }
+
+    public void Rotate(InputAction.CallbackContext context)
+    {
+        Vector2 v = context.ReadValue<Vector2>();
+        if (v != Vector2.zero)
+        {
+            transform.forward = new Vector3(v.x, 0, v.y);
         }
     }
 }
