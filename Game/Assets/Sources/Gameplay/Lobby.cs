@@ -41,17 +41,18 @@ public class Lobby:MonoBehaviour
 
     private static Vector3 GetPosition(int n)
     {
-        int posX = 6;
-        int posY = 3;
+        int posX = 2;
+        int posY = 1;
+        int posZ = -7;
 
         if (n == 0)
-            return new Vector3(-posX, posY, 0);
+            return new Vector3(-posX, posY, posZ);
         else if (n == 1)
-            return new Vector3(posX, posY, 0);
+            return new Vector3(posX, posY, posZ);
         else if (n == 2)
-            return new Vector3(- posX, - posY, 0);
+            return new Vector3(- posX, - posY, posZ);
         else if (n == 3)
-            return new Vector3(posX, - posY, 0);
+            return new Vector3(posX, - posY, posZ);
         else
              return new Vector3(0, 0, 0);
     }
