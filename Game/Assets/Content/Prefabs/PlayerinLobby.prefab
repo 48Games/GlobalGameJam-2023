@@ -43,9 +43,9 @@ GameObject:
   - component: {fileID: 3741847277799669043}
   - component: {fileID: 3741847277799669042}
   - component: {fileID: 3741847277799669047}
-  - component: {fileID: 230931493198225075}
+  - component: {fileID: 6262618294159955898}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerinLobby
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &230931493198225075
+--- !u!114 &6262618294159955898
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
