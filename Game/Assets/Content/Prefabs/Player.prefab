@@ -154,22 +154,58 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.009048462
-      value: 1.9900712
-      inSlope: -2.3754668
-      outSlope: -2.3754668
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5013131
-      value: 0.8207129
-      inSlope: -8.518589
-      outSlope: -8.518589
+      time: 0.021770477
+      value: 1.0059986
+      inSlope: 0.050542053
+      outSlope: 0.050542053
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.09097339
+      inWeight: 0
+      outWeight: 0.79799074
+    - serializedVersion: 3
+      time: 0.12107563
+      value: 3.778633
+      inSlope: 0.5053093
+      outSlope: 0.5053093
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.76782733
+    - serializedVersion: 3
+      time: 0.19514465
+      value: 3.7845325
+      inSlope: -0.046719648
+      outSlope: -0.046719648
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.47125798
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.27520633
+      value: 1.0553334
+      inSlope: -0.14032118
+      outSlope: -0.14032118
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.84582716
+    - serializedVersion: 3
+      time: 0.48091096
+      value: 0.8646147
+      inSlope: -3.0689867
+      outSlope: -3.0689867
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.31451732
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.53054726
+      value: 0.22217515
+      inSlope: -0.19406362
+      outSlope: -0.19406362
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2537902
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -177,7 +213,7 @@ MonoBehaviour:
   dashCooldown: 1
   shoot: {fileID: 3159214701603528554, guid: 866a27a0e92959b45bf00cc2c2e6c898, type: 3}
   aimpoint: {fileID: 1720316367}
-  shootCooldown: 3
+  shootCooldown: 0.5
 --- !u!114 &3741847277799669047
 MonoBehaviour:
   m_ObjectHideFlags: 0
