@@ -27,6 +27,12 @@ public class Shoot : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+       
         Player p = other.gameObject.GetComponent<Player>();
         if (p == null)
         {

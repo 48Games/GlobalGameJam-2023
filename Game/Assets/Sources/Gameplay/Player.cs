@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     public Color[] playerColors;
     public GameObject rootVisualPrefab;
 
-    private Vector2 velocity = new Vector2();
     private Rigidbody rigidbody;
 
     // Dash
@@ -46,12 +45,17 @@ public class Player : MonoBehaviour
     // Animator
     [SerializeField] private Animator animator;
 
+    // GameManager
+    [SerializeField] private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         Keyframe lastKey = animationCurve[animationCurve.length - 1];
         lastKeyTime = lastKey.time;
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        gameManager.PlayerRegister(this.gameObject);
     }
 
     public void SetupPlayer(int playerID)
@@ -192,5 +196,10 @@ public class Player : MonoBehaviour
         s.GetComponent<Shoot>().SetVelocity(transform.forward);
     }
 
+    public void Death()
+    {
+        this.gameObject.SetActive(false);
+        gameManager.PlayerDie(this.gameObject);
+    }
 
 }
