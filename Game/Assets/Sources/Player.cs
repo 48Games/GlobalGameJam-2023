@@ -86,7 +86,8 @@ public class Player : MonoBehaviour
             if(velocity.x == 0 && velocity.y == 0)
             {
                 // Immobile
-                velocity = transform.forward;
+                velocity = new Vector2(transform.forward.x, transform.forward.z);
+                stopped = true;
             }
         }
     }
