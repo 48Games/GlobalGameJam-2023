@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 14
+  acceleration: 10
   animationCurve:
     serializedVersion: 2
     m_Curve:

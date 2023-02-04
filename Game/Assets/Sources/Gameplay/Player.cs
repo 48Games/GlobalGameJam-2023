@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     public float speed;
+    public float acceleration;
     public AnimationCurve animationCurve;
     public float dashCooldown;
 
@@ -19,15 +20,17 @@ public class Player : MonoBehaviour
 
     // Dash
     private float lastKeyTime;
-    private float speedMultiplicator = 1;
     private float currentDashCooldown = 0;
     private float dashAnimationPoint = 0;
     private bool inDash = false;
-    private bool stopped = false;
 
     // Shoot
     public float shootCooldown;
     private float currentShootCooldown = 0;
+
+    private Vector3 targetVelocity;
+    private Vector3 currentVelocity;
+    private Vector3 dashDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -56,40 +59,29 @@ public class Player : MonoBehaviour
                 currentDashCooldown = 0;
             }
         }
-        if(inDash)
+        currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * acceleration);
+        if (inDash)
         {
             dashAnimationPoint += Time.deltaTime;
             if(dashAnimationPoint >= lastKeyTime)
             {
                 // end of the dash
-                speedMultiplicator = 1;
                 inDash = false;
-                if(stopped)
-                {
-                    stopped = false;
-                    velocity = Vector2.zero;
-                }
+                currentVelocity = Vector2.zero;
             }
             else
             {
-                speedMultiplicator = animationCurve.Evaluate(dashAnimationPoint);
+                currentVelocity = speed * animationCurve.Evaluate(dashAnimationPoint) * dashDirection;
             }
         }
-        controller.Move(new Vector3(velocity.x,0, velocity.y).normalized * speed * speedMultiplicator * Time.deltaTime);
+        controller.Move(currentVelocity * Time.deltaTime);
     }
 
     public void Move(InputAction.CallbackContext context)
     {
-        if(!inDash)
-        {
-            velocity = context.ReadValue<Vector2>();
-        } else if (context.ReadValue<Vector2>() == Vector2.zero)
-        {
-            stopped = true;
-        } else
-        {
-            stopped = false;
-        }
+
+        Vector2 newVelocity = context.ReadValue<Vector2>();
+        targetVelocity = new Vector3(newVelocity.x, 0, newVelocity.y) * speed;
     }
 
     public void Dash(InputAction.CallbackContext context)
@@ -99,14 +91,15 @@ public class Player : MonoBehaviour
             currentDashCooldown = dashCooldown;
             dashAnimationPoint = 0;
             inDash = true;
-            if(velocity.x == 0 && velocity.y == 0)
+            if(currentVelocity.x == 0 && currentVelocity.z == 0)
             {
                 // Immobile
-                velocity = new Vector2(transform.forward.x, transform.forward.z);
-                stopped = true;
+                // velocity = new Vector2(transform.forward.x, transform.forward.z);
+                // stopped = true;
             } else
             {
-                transform.forward = new Vector3(velocity.normalized.x, 0, velocity.normalized.y);
+                transform.forward = currentVelocity;
+                dashDirection = currentVelocity.normalized;
             }
         }
     }
