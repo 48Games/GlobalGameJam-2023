@@ -10,6 +10,10 @@ public class Player : MonoBehaviour
     public AnimationCurve animationCurve;
     public float dashCooldown;
 
+    // Child objects
+    public GameObject shoot;
+    public Transform aimpoint;
+
     private Vector2 velocity = new Vector2();
     private CharacterController controller;
 
@@ -20,6 +24,10 @@ public class Player : MonoBehaviour
     private float dashAnimationPoint = 0;
     private bool inDash = false;
     private bool stopped = false;
+
+    // Shoot
+    public float shootCooldown;
+    private float currentShootCooldown = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +40,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentDashCooldown > 0)
+        if (currentShootCooldown > 0)
+        {
+            currentShootCooldown -= Time.deltaTime;
+            if (currentShootCooldown < 0)
+            {
+                currentShootCooldown = 0;
+            }
+        }
+        if (currentDashCooldown > 0)
         {
             currentDashCooldown -= Time.deltaTime;
             if(currentDashCooldown < 0)
@@ -88,16 +104,36 @@ public class Player : MonoBehaviour
                 // Immobile
                 velocity = new Vector2(transform.forward.x, transform.forward.z);
                 stopped = true;
+            } else
+            {
+                transform.forward = new Vector3(velocity.normalized.x, 0, velocity.normalized.y);
             }
         }
     }
 
     public void Rotate(InputAction.CallbackContext context)
     {
-        Vector2 v = context.ReadValue<Vector2>();
-        if (v != Vector2.zero)
+        if(!inDash)
         {
-            transform.forward = new Vector3(v.x, 0, v.y);
+            Vector2 v = context.ReadValue<Vector2>();
+            if (v != Vector2.zero)
+            {
+                transform.forward = new Vector3(v.x, 0, v.y);
+            }
         }
     }
+
+    public void Shoot(InputAction.CallbackContext context)
+    {
+        if(currentShootCooldown == 0 && !inDash)
+        {
+            GameObject s = Instantiate(shoot);
+            s.GetComponent<Shoot>().owner = this;
+            s.GetComponent<Transform>().position = aimpoint.position;
+            s.GetComponent<Shoot>().SetVelocity(transform.forward);
+            currentShootCooldown = shootCooldown;
+        }
+    }
+
+
 }
