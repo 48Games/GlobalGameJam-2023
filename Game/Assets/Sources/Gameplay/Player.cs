@@ -3,26 +3,35 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Visuals;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
     public float speed;
     public float acceleration;
     public AnimationCurve animationCurve;
     public float dashCooldown;
+    public float rootDuration;
 
     // Child objects
     public GameObject shoot;
     public Transform aimpoint;
 
+    [Header("Visuals")]
+    public Color[] playerColors;
+    public GameObject rootVisualPrefab;
+
     private Vector2 velocity = new Vector2();
-    private CharacterController controller;
+    private Rigidbody rigidbody;
 
     // Dash
     private float lastKeyTime;
     private float currentDashCooldown = 0;
     private float dashAnimationPoint = 0;
     private bool inDash = false;
+
+    public bool Rooted { get; private set; }
 
     // Shoot
     public float shootCooldown;
@@ -32,12 +41,51 @@ public class Player : MonoBehaviour
     private Vector3 currentVelocity;
     private Vector3 dashDirection;
 
+    public int PlayerID { get; private set; }
+
+    // Animator
+    [SerializeField] private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        rigidbody = GetComponent<Rigidbody>();
         Keyframe lastKey = animationCurve[animationCurve.length - 1];
         lastKeyTime = lastKey.time;
+    }
+
+    public void SetupPlayer(int playerID)
+    {
+        PlayerID = playerID;
+        var characterVisual = GetComponentInChildren<CharacterVisual>();
+        characterVisual.SetCharacterColor(playerColors[playerID]);
+    }
+
+    public void Root()
+    {
+        if (Rooted) return;
+        StartCoroutine(RootCoroutine());
+    }
+
+    private IEnumerator RootCoroutine()
+    {
+        Rooted = true;
+        rigidbody.isKinematic = true;
+        animator.SetBool("Rooted", true);
+        var visual = Instantiate(rootVisualPrefab);
+        visual.transform.position = transform.position;
+        float progress = 0.0f;
+        while (progress < rootDuration)
+        {
+            var scale = Mathf.Clamp01(progress * rootDuration / 0.2f);
+            visual.transform.localScale = Vector3.one * scale * 1.5f;
+            yield return null;
+            progress += Time.deltaTime;
+        }
+        Rooted = false;
+        animator.SetBool("Rooted", false);
+        rigidbody.isKinematic = false;
+        Destroy(visual);
     }
 
     // Update is called once per frame
@@ -59,27 +107,36 @@ public class Player : MonoBehaviour
                 currentDashCooldown = 0;
             }
         }
-        currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * acceleration);
-        if (inDash)
+
+        if (Rooted)
         {
-            dashAnimationPoint += Time.deltaTime;
-            if(dashAnimationPoint >= lastKeyTime)
+            currentVelocity = Vector3.zero;
+        }
+        else
+        {
+            currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * acceleration);
+            if (inDash)
             {
-                // end of the dash
-                inDash = false;
-                currentVelocity = Vector2.zero;
-            }
-            else
-            {
-                currentVelocity = speed * animationCurve.Evaluate(dashAnimationPoint) * dashDirection;
+                dashAnimationPoint += Time.deltaTime;
+                if (dashAnimationPoint >= lastKeyTime)
+                {
+                    // end of the dash
+                    inDash = false;
+                    currentVelocity = Vector2.zero;
+                }
+                else
+                {
+                    currentVelocity = speed * animationCurve.Evaluate(dashAnimationPoint) * dashDirection;
+                }
             }
         }
-        controller.Move(currentVelocity * Time.deltaTime);
+
+        rigidbody.velocity = currentVelocity;
+        animator.SetFloat("Speed", currentVelocity.magnitude);
     }
 
     public void Move(InputAction.CallbackContext context)
     {
-
         Vector2 newVelocity = context.ReadValue<Vector2>();
         targetVelocity = new Vector3(newVelocity.x, 0, newVelocity.y) * speed;
     }
@@ -101,6 +158,8 @@ public class Player : MonoBehaviour
                 transform.forward = currentVelocity;
                 dashDirection = currentVelocity.normalized;
             }
+
+            animator.SetTrigger("Dash");
         }
     }
 
@@ -118,14 +177,19 @@ public class Player : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
-        if(currentShootCooldown == 0 && !inDash)
+        if (currentShootCooldown <= 0 && !inDash)
         {
-            GameObject s = Instantiate(shoot);
-            s.GetComponent<Shoot>().owner = this;
-            s.GetComponent<Transform>().position = aimpoint.position;
-            s.GetComponent<Shoot>().SetVelocity(transform.forward);
+            animator.SetTrigger("Attack");
             currentShootCooldown = shootCooldown;
         }
+    }
+
+    public void ShootEvent()
+    {
+        GameObject s = Instantiate(shoot);
+        s.GetComponent<Shoot>().owner = this;
+        s.GetComponent<Transform>().position = aimpoint.position;
+        s.GetComponent<Shoot>().SetVelocity(transform.forward);
     }
 
 

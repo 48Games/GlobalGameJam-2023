@@ -25,12 +25,17 @@ public class Shoot : MonoBehaviour
         GetComponent<Rigidbody>().velocity = direction * speed;
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         Player p = other.gameObject.GetComponent<Player>();
         if (p == null)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+        }
+        else
+        {
+            p.Root();
+            Destroy(gameObject);
         }
     }
 }
