@@ -12,7 +12,7 @@ public class Lobby:MonoBehaviour
 {
     public static int MAX_PLAYER = 4;
 
-    static GameObject[] players = new GameObject[MAX_PLAYER];
+    static InputDevice[] players = new InputDevice[MAX_PLAYER];
     static int playernumber = 0;
 
 
@@ -20,18 +20,19 @@ public class Lobby:MonoBehaviour
     {
         Debug.Log("Player Joined");
         player.transform.position = GetPosition(playernumber);
-        players[playernumber] = player;
+        players[playernumber] = player.GetComponent<PlayerInput>().GetDevice<InputDevice>();
         playernumber++;
 
-        if (playernumber > 1)
+        if (playernumber > 0)
             GameObject.FindGameObjectWithTag("BtnGo").GetComponent<Button>().interactable = true;
+
     }
 
     public void OnPlayerLeft(GameObject player)
     {
-        Debug.Log("Player Joined");
+        Debug.Log("Player Left");
         playernumber--;
-        Destroy(players[playernumber].gameObject);
+        //Destroy(players[playernumber].gameObject);
         players[playernumber] = null;
 
 
