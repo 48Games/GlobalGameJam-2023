@@ -214,7 +214,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh72884
+  m_Name: pb_Mesh86116
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -57913,3 +57913,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7b07aff70bca4e4d95dc7239caa6962, type: 3}
+--- !u!1001 &3412669462213633525
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8109452704442055780, guid: 3c498604f997757499ae31f2db01935f, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109452704442055780, guid: 3c498604f997757499ae31f2db01935f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.137
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109452704442055780, guid: 3c498604f997757499ae31f2db01935f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.428
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109452704442055780, guid: 3c498604f997757499ae31f2db01935f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.195
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109452704442055780, guid: 3c498604f997757499ae31f2db01935f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109452704442055780, guid: 3c498604f997757499ae31f2db01935f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109452704442055780, guid: 3c498604f997757499ae31f2db01935f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109452704442055780, guid: 3c498604f997757499ae31f2db01935f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109452704442055780, guid: 3c498604f997757499ae31f2db01935f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109452704442055780, guid: 3c498604f997757499ae31f2db01935f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109452704442055780, guid: 3c498604f997757499ae31f2db01935f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8520121526359148200, guid: 3c498604f997757499ae31f2db01935f, type: 3}
+      propertyPath: m_Name
+      value: pfb_vfx_death
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c498604f997757499ae31f2db01935f, type: 3}

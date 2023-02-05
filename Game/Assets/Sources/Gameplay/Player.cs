@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     [Header("Visuals")]
     public Color[] playerColors;
     public GameObject rootVisualPrefab;
+    public GameObject deathVFXPrefab;
 
     private Rigidbody rigidbody;
 
@@ -275,6 +276,11 @@ public class Player : MonoBehaviour
         AudioSource.PlayOneShot(DeathSfx);
         this.gameObject.SetActive(false);
         gameManager.PlayerDie(this.gameObject);
+
+        var deathVfx = Instantiate(deathVFXPrefab);
+        deathVfx.transform.position = transform.position;
+        deathVfx.GetComponent<DeathFXVisual>().SetColor(characterVisual.Color);
+        Destroy(deathVfx, 1.0f);
     }
 
 }
