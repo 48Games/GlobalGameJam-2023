@@ -10,6 +10,7 @@ TagManager:
   - Lobby
   - BtnGo
   - inputManager
+  - ScoreTxt
   layers:
   - Default
   - TransparentFX

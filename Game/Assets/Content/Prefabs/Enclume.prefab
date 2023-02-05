@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 75
-  lifeDuration: 2
+  lifeDuration: 1
 --- !u!4 &3182341178849462213 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 69fccd6921688a843b979288640b7beb, type: 3}

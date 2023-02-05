@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     private bool spawningAnvil = false;
     private PlayerInputManager playerInputManager = null;
     public GameObject playerObject;
+    private bool inEnd = false;
+    List<int> score = new();
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +37,9 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        // For debug
+
+
+        // For debug --------
         if (list[0] == null)
         {
             GameObject player = Instantiate(playerObject);
@@ -49,6 +53,9 @@ public class GameManager : MonoBehaviour
             player.GetComponent<Player>().Spawn = new Vector3(spawns[i].transform.position.x, player.transform.position.y, spawns[i].transform.position.z);
             player.transform.position = player.GetComponent<Player>().Spawn;
         }
+        // ------------
+
+
     }
 
     // Update is called once per frame
@@ -57,11 +64,8 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.BEGIN:
-                if(players.Count >= 2)
-                {
-                    state = GameState.RUNNING;
-                    StartCoroutine(SpawnAnvilCoroutine());
-                }
+                state = GameState.RUNNING;
+                spawningAnvil = false;
                 break;
             case GameState.RUNNING:
                 // Anvils
@@ -71,8 +75,21 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.END:
-                state = GameState.OFF;
-                StartCoroutine(EndRoundCoroutine());
+                if(!inEnd)
+                {
+                    inEnd = true;
+                    StartCoroutine(EndRoundCoroutine());
+                }
+                break;
+            case GameState.POSTGAME:
+                StartCoroutine(PostGameCoroutine());
+                break;
+            case GameState.OFF:
+                if (Input.anyKeyDown)
+                {
+                    state = GameState.BEGIN;
+                    NewRound();
+                }
                 break;
 
         }
@@ -102,14 +119,92 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator EndRoundCoroutine()
     {
-        float progress = 0.0f;
-        while (progress < 1)
+        float timeblocked = 1f;
+        while (timeblocked > 0)
         {
             yield return null;
-            progress += Time.deltaTime;
+            timeblocked -= Time.deltaTime;
         }
-        NewRound();
+
+        if (score.Count == 0)
+            for (int i = 0; i < players.Count; i++)
+            {
+                score.Add(0);
+            }
+
+        int winner = 0;
+        players.ForEach((player) =>
+        {
+            if (player.activeInHierarchy)
+            {
+                winner = player.GetComponent<Player>().PlayerID + 1;
+            }
+        });
+        bool end = false;
+        string text = "";
+        if (winner == 0)
+        {
+            text += "Draw\n\n";
+        }
+        
+        else
+        {
+            score[winner - 1] += 1;
+            if (checkWin(score)) // Check end
+            {
+                end = true;
+                text += "Player " + (char)('A' + winner - 1) + " won the Game !\n\n";
+            }
+            else
+            {
+                text += "Player " + (char)('A' + winner - 1) + " won the round\n\n";
+            }
+        }
+        text += "Player A : " + new string('*', score[0]) + "\n";
+        text += "Player B : " + new string('*', score[1]) + "\n";
+        if (players.Count > 2) text += "Player C : " + new string('*', score[2]) + "\n";
+        if (players.Count > 3) text += "Player D : " + new string('*', score[3]) + "\n";
+
+        GameObject.FindGameObjectWithTag("ScoreTxt").transform.GetChild(0).gameObject.SetActive(true);
+        GameObject.FindGameObjectWithTag("ScoreTxt").GetComponentInChildren<TextMeshProUGUI>().text = text;
+        
+        
+
+        if(!end)
+        {
+            state = GameState.POSTGAME;
+            inEnd = false;
+        }
+        else
+        {
+            state = GameState.QUIT;
+        }
     }
+
+    private bool checkWin(List<int> score)
+    {
+        for(int i = 0; i < score.Count; i++)
+        {
+            if (score[i] >= 5)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private IEnumerator PostGameCoroutine()
+    {
+        float timeblocked = 2f;
+        while (timeblocked > 0)
+        {
+            yield return null;
+            timeblocked -= Time.deltaTime;
+        }
+        if(state == GameState.POSTGAME)
+            state = GameState.OFF;
+    }
+
     public void PlayerDie(GameObject player)
     {
         int count = 0;
@@ -123,32 +218,33 @@ public class GameManager : MonoBehaviour
         if (count <= 1)
         {
             if (state == GameState.RUNNING)
+            {
                 state = GameState.END;
+                players.ForEach((player) =>
+                {
+                    if (player.active)
+                    {
+                        player.transform.position = player.GetComponent<Player>().Spawn;
+                    }
+                });
+            }
         }
 
+        
     }
 
     public void NewRound()
     {
-        int winner = 0;
-        state = GameState.BEGIN;
+        Debug.Log("New Round Start");
+        GameObject.FindGameObjectWithTag("ScoreTxt").transform.GetChild(0).gameObject.SetActive(false);
+
         players.ForEach((player) =>
         {
-            if (player.active)
-            {
-                winner = player.GetComponent<Player>().PlayerID + 1;
-            }
             player.gameObject.SetActive(true);
             player.transform.position = player.GetComponent<Player>().Spawn;
         });
-        if (winner == 0)
-        {
-            Debug.Log("Draw");
-        }
-        else
-        {
-            Debug.Log("A player won: " + winner);
-        }
+        Debug.Log("New Round");
+
     }
 
     public void PlayerRegister(GameObject player)
@@ -156,6 +252,10 @@ public class GameManager : MonoBehaviour
         players.Add(player);
     }
 
+    public bool IsAbleToMove()
+    {
+        return state == GameState.RUNNING;
+    }
 }
 
 enum GameState
@@ -163,5 +263,7 @@ enum GameState
     BEGIN,
     RUNNING,
     END,
-    OFF
+    POSTGAME,
+    OFF,
+    QUIT
 }
