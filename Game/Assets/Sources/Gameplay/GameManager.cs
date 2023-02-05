@@ -177,6 +177,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            GameObject.FindGameObjectWithTag("ScoreTxt").transform.GetChild(1).gameObject.SetActive(true);
             state = GameState.QUIT;
         }
     }
