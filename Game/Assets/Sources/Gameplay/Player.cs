@@ -239,7 +239,8 @@ public class Player : MonoBehaviour
     {
         GameObject s = Instantiate(shoot);
         s.GetComponent<Shoot>().owner = this;
-        s.GetComponent<Transform>().position = aimpoint.position;
+        s.transform.position = aimpoint.position;
+        s.transform.forward = transform.forward;
         s.GetComponent<Shoot>().SetVelocity(transform.forward);
     }
 
