@@ -24,7 +24,6 @@ public class Lobby:MonoBehaviour
 
         if (playernumber > 0)
             GameObject.FindGameObjectWithTag("BtnGo").GetComponent<Button>().interactable = true;
-
     }
 
     public void OnPlayerLeft(GameObject player)

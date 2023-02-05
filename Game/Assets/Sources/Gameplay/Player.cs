@@ -8,6 +8,24 @@ using Visuals;
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
+    [Header("Le Son")]
+    [Tooltip("Audio source for footsteps, jump, etc...")]
+    public AudioSource AudioSource;
+
+    public float FootstepSfxFrequency = 3f;
+    public AudioClip[] FootstepSfx;
+    public AudioClip DashSfx;
+    public AudioClip AttackSfx;
+    public AudioClip RootedSfx;
+    public AudioClip DeathSfx;
+    public AudioClip BuffSmallSfx;
+    public AudioClip BuffBigSfx;
+    public AudioClip BuffHugeSfx;
+
+    float m_FootstepDistanceCounter;
+
+
+    [Header("Les trucs de Thomas")]
     public float speed;
     public float acceleration;
     public AnimationCurve animationCurve;
@@ -74,6 +92,7 @@ public class Player : MonoBehaviour
     public void Root()
     {
         if (Rooted) return;
+        AudioSource.PlayOneShot(RootedSfx);
         StartCoroutine(RootCoroutine());
     }
 
@@ -144,6 +163,16 @@ public class Player : MonoBehaviour
 
         rigidbody.velocity = currentVelocity;
         animator.SetFloat("Speed", currentVelocity.magnitude);
+
+        // footsteps sound
+        if (m_FootstepDistanceCounter >= 1f / FootstepSfxFrequency)
+        {
+            m_FootstepDistanceCounter = 0f;
+            //AudioSource.PlayOneShot(FootstepSfx[(int)(Random.value*(FootstepSfx.Length -1))]);
+        }
+
+        // keep track of distance traveled for footsteps sound
+        m_FootstepDistanceCounter += rigidbody.velocity.magnitude * Time.deltaTime;
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -171,6 +200,7 @@ public class Player : MonoBehaviour
             }
 
             animator.SetTrigger("Dash");
+            AudioSource.PlayOneShot(DashSfx);
         }
     }
 
@@ -192,6 +222,7 @@ public class Player : MonoBehaviour
         {
             animator.SetTrigger("Attack");
             currentShootCooldown = shootCooldown;
+            AudioSource.PlayOneShot(AttackSfx);
         }
     }
 
