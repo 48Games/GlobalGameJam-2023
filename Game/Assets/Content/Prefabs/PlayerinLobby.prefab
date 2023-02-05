@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6262618294159955898}
   m_Layer: 0
   m_Name: PlayerinLobby
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,6 +140,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99184a663fa4ec145aab98f21c892f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerColors:
+  - {r: 0.8962264, g: 0.12259703, b: 0.12259703, a: 1}
+  - {r: 0.12967247, g: 0.872115, b: 0.8867924, a: 1}
+  - {r: 0.8867924, g: 0.7069621, b: 0.11294055, a: 1}
+  - {r: 0.24592285, g: 0.754717, b: 0.17443931, a: 1}
 --- !u!1001 &4095185067232148246
 PrefabInstance:
   m_ObjectHideFlags: 0
