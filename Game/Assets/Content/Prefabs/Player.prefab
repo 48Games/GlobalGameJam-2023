@@ -84,7 +84,10 @@ MonoBehaviour:
   AudioSource: {fileID: -2262340352281747875}
   FootstepSfxFrequency: 1
   FootstepSfx:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 59ea18e2d6c229a4fa2adce428c1f6df, type: 3}
+  - {fileID: 8300000, guid: 6b33fdce620f3d14692ce76c926d287f, type: 3}
+  - {fileID: 8300000, guid: a5c058f75a133d347bba9f55e56b28da, type: 3}
+  - {fileID: 8300000, guid: 0dfba2fd7323eec438be42c1fe014a1a, type: 3}
   VoiceSfxFrequency: {x: 10, y: 20}
   VoicesSfx:
   - {fileID: 8300000, guid: a8780e8b8a46d28448c7c1c2b4875944, type: 3}

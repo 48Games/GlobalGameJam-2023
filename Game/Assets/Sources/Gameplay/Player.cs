@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [Tooltip("Audio source for footsteps, jump, etc...")]
     public AudioSource AudioSource;
 
-    public float FootstepSfxFrequency = 3f;
+    public float FootstepSfxFrequency = 1f;
     public AudioClip[] FootstepSfx;
     public Vector2 VoiceSfxFrequency = new Vector2(5f,15f);
     public AudioClip[] VoicesSfx;
@@ -187,7 +187,7 @@ public class Player : MonoBehaviour
         if (m_FootstepDistanceCounter >= 1f / FootstepSfxFrequency)
         {
             m_FootstepDistanceCounter = 0f;
-            //AudioSource.PlayOneShot(FootstepSfx[(int)(Random.value*(FootstepSfx.Length -1))]);
+            AudioSource.PlayOneShot(FootstepSfx[(int)(Random.value*(FootstepSfx.Length -1))]);
         }
         m_FootstepDistanceCounter += rigidbody.velocity.magnitude * Time.deltaTime;
 
@@ -271,6 +271,8 @@ public class Player : MonoBehaviour
             Destroy(rootVisual);
             rootVisual = null;
         }
+
+        AudioSource.PlayOneShot(DeathSfx);
         this.gameObject.SetActive(false);
         gameManager.PlayerDie(this.gameObject);
     }
