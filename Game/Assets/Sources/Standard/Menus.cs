@@ -5,12 +5,16 @@ using UnityEngine.UI;
 
 public class Menus : MonoBehaviour
 {
-     private float mouvement = 0;
+    public AudioClip validationSFX;
+    public AudioSource validationSFXSource;
+
+    private float mouvement = 0;
     public void SetFront()
     {
         mouvement = -80;
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
         gameObject.GetComponentInChildren<Button>()?.Select();
+        validationSFXSource.PlayOneShot(validationSFX);
     }
 
     public void SetBack()

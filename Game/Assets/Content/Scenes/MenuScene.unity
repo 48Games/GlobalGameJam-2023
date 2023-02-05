@@ -1156,6 +1156,8 @@ GameObject:
   - component: {fileID: 606577051}
   - component: {fileID: 606577050}
   - component: {fileID: 606577052}
+  - component: {fileID: 606577054}
+  - component: {fileID: 606577053}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1223,6 +1225,116 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 0
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!114 &606577053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606577048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83228540be63fe94ba5241befa409882, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectionSFX: {fileID: 8300000, guid: 91bad88e9cd3d3c4398e2419c424396c, type: 3}
+  selectionSFXSource: {fileID: 606577054}
+--- !u!82 &606577054
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606577048}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 6900757973992339512, guid: a54acebe7e5df6b468a2f2e36300ccb6, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &753605394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1419,6 +1531,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bef5df624706fd418960519e721d777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  validationSFX: {fileID: 8300000, guid: 8b91bef6864c8c844bc2d19f0b93d246, type: 3}
+  validationSFXSource: {fileID: 606577054}
 --- !u!1 &800330212
 GameObject:
   m_ObjectHideFlags: 0
@@ -2487,6 +2601,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bef5df624706fd418960519e721d777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  validationSFX: {fileID: 8300000, guid: 8b91bef6864c8c844bc2d19f0b93d246, type: 3}
+  validationSFXSource: {fileID: 606577054}
 --- !u!1 &1274623938
 GameObject:
   m_ObjectHideFlags: 0
@@ -3156,6 +3272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bef5df624706fd418960519e721d777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  validationSFX: {fileID: 8300000, guid: 8b91bef6864c8c844bc2d19f0b93d246, type: 3}
+  validationSFXSource: {fileID: 606577054}
 --- !u!1 &1576195222
 GameObject:
   m_ObjectHideFlags: 0
@@ -3243,6 +3361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bef5df624706fd418960519e721d777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  validationSFX: {fileID: 8300000, guid: 8b91bef6864c8c844bc2d19f0b93d246, type: 3}
+  validationSFXSource: {fileID: 606577054}
 --- !u!1 &1839949433
 GameObject:
   m_ObjectHideFlags: 0
@@ -3501,9 +3621,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9720341, g: 1, b: 0.13679248, a: 1}
-    m_PressedColor: {r: 0.9725491, g: 1, b: 0.13725491, a: 1}
-    m_SelectedColor: {r: 0.9725491, g: 1, b: 0.13725491, a: 1}
+    m_HighlightedColor: {r: 0.6187506, g: 0, b: 1, a: 1}
+    m_PressedColor: {r: 0.61960787, g: 0, b: 1, a: 1}
+    m_SelectedColor: {r: 0.61960787, g: 0, b: 1, a: 1}
     m_DisabledColor: {r: 0, g: 0, b: 0, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.2
