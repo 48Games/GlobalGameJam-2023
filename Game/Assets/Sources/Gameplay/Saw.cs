@@ -44,7 +44,8 @@ public class Saw : MonoBehaviour
     {
         // Random time waiting
         float progress = 0.0f;
-        while (progress < Random.Range(4, 10))
+        float randomTime = Random.Range(4, 10);
+        while (progress < randomTime)
         {
             yield return null;
             progress += Time.deltaTime;
