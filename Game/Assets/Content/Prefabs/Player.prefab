@@ -170,6 +170,7 @@ MonoBehaviour:
   - {r: 0.8867924, g: 0.7069621, b: 0.11294055, a: 1}
   - {r: 0.24592285, g: 0.754717, b: 0.17443931, a: 1}
   rootVisualPrefab: {fileID: 3282012445897627456, guid: f7b07aff70bca4e4d95dc7239caa6962, type: 3}
+  deathVFXPrefab: {fileID: 8520121526359148200, guid: 3c498604f997757499ae31f2db01935f, type: 3}
   shootCooldown: 1.3
   animator: {fileID: 4141263513842363959}
   gameManager: {fileID: 0}

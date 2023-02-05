@@ -19,8 +19,11 @@ namespace Visuals
         //    SetCharacterColor(color);
         //}
 
+        public Color Color { get; private set; }
+
         public void SetCharacterColor(Color color)
         {
+            Color = color;
             characterRenderer.materials[0].color = color;
             indicatorRenderer.material.color = color;
             trailRenderer.startColor = color;
