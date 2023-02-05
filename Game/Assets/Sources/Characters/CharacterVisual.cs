@@ -10,6 +10,7 @@ namespace Visuals
         [Header("Setup")]
         [SerializeField] private SkinnedMeshRenderer characterRenderer;
         [SerializeField] private MeshRenderer indicatorRenderer;
+        [SerializeField] private TrailRenderer trailRenderer;
 
         // Used to preview colors
         //public Color color;
@@ -22,7 +23,15 @@ namespace Visuals
         {
             characterRenderer.materials[0].color = color;
             indicatorRenderer.material.color = color;
+            trailRenderer.startColor = color;
+            trailRenderer.endColor = new Color(color.r, color.g, color.b, 0.0f);
         }
+
+        public void ShowTrail(bool show)
+        {
+            trailRenderer.enabled = show;
+        }
+
     }
 
 }
