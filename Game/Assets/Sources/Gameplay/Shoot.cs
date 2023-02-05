@@ -8,6 +8,8 @@ public class Shoot : MonoBehaviour
     public float speed;
     public Player owner;
 
+    public GameObject hitPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,13 @@ public class Shoot : MonoBehaviour
     void Update()
     {
 
+    }
+
+    private void OnDestroy()
+    {
+        var go = Instantiate(hitPrefab);
+        go.transform.position = transform.position;
+        Destroy(go, 0.5f);
     }
 
     public void SetVelocity(Vector3 direction)

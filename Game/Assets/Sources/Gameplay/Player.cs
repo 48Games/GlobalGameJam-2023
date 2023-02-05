@@ -61,7 +61,8 @@ public class Player : MonoBehaviour
     private Vector3 currentVelocity;
     private Vector3 dashDirection;
 
-    private GameObject visual;
+    private GameObject rootVisual;
+    private CharacterVisual characterVisual;
 
     // Spawner
     public Vector3 Spawn { get; set; }
@@ -93,7 +94,7 @@ public class Player : MonoBehaviour
     public void SetupPlayer(int playerID)
     {
         PlayerID = playerID;
-        var characterVisual = GetComponentInChildren<CharacterVisual>();
+        characterVisual = GetComponentInChildren<CharacterVisual>();
         characterVisual.SetCharacterColor(playerColors[playerID]);
     }
 
@@ -109,21 +110,21 @@ public class Player : MonoBehaviour
         Rooted = true;
         rigidbody.isKinematic = true;
         animator.SetBool("Rooted", true);
-        visual = Instantiate(rootVisualPrefab);
-        visual.transform.position = transform.position;
+        rootVisual = Instantiate(rootVisualPrefab);
+        rootVisual.transform.position = transform.position;
         float progress = 0.0f;
         while (progress < rootDuration)
         {
             var scale = Mathf.Clamp01(progress * rootDuration / 0.2f);
-            visual.transform.localScale = Vector3.one * scale * 1.5f;
+            rootVisual.transform.localScale = Vector3.one * scale * 1.5f;
             yield return null;
             progress += Time.deltaTime;
         }
         Rooted = false;
         animator.SetBool("Rooted", false);
         rigidbody.isKinematic = false;
-        Destroy(visual);
-        visual = null;
+        Destroy(rootVisual);
+        rootVisual = null;
     }
 
     // Update is called once per frame
@@ -168,6 +169,7 @@ public class Player : MonoBehaviour
                 if (dashAnimationPoint >= lastKeyTime)
                 {
                     // end of the dash
+                    characterVisual.ShowTrail(false);
                     inDash = false;
                     currentVelocity = Vector2.zero;
                 }
@@ -211,7 +213,8 @@ public class Player : MonoBehaviour
             currentDashCooldown = dashCooldown;
             dashAnimationPoint = 0;
             inDash = true;
-            if(currentVelocity.x == 0 && currentVelocity.z == 0)
+            characterVisual.ShowTrail(true);
+            if (currentVelocity.x == 0 && currentVelocity.z == 0)
             {
                 // Immobile
                 // velocity = new Vector2(transform.forward.x, transform.forward.z);
@@ -253,19 +256,20 @@ public class Player : MonoBehaviour
     {
         GameObject s = Instantiate(shoot);
         s.GetComponent<Shoot>().owner = this;
-        s.GetComponent<Transform>().position = aimpoint.position;
+        s.transform.position = aimpoint.position;
+        s.transform.forward = transform.forward;
         s.GetComponent<Shoot>().SetVelocity(transform.forward);
     }
 
     public void Death()
     {
-        if(visual != null)
+        if(rootVisual != null)
         {
             Rooted = false;
             animator.SetBool("Rooted", false);
             rigidbody.isKinematic = false;
-            Destroy(visual);
-            visual = null;
+            Destroy(rootVisual);
+            rootVisual = null;
         }
         this.gameObject.SetActive(false);
         gameManager.PlayerDie(this.gameObject);
