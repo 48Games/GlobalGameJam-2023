@@ -85,6 +85,12 @@ MonoBehaviour:
   FootstepSfxFrequency: 1
   FootstepSfx:
   - {fileID: 0}
+  VoiceSfxFrequency: {x: 10, y: 20}
+  VoicesSfx:
+  - {fileID: 8300000, guid: a8780e8b8a46d28448c7c1c2b4875944, type: 3}
+  - {fileID: 8300000, guid: f7732956bee37f643b7c5d4fb2d75704, type: 3}
+  - {fileID: 8300000, guid: 33638b9549338354c8ba891792b49d88, type: 3}
+  - {fileID: 8300000, guid: 51a9e57137a2e6a4ab0655527f33c634, type: 3}
   DashSfx: {fileID: 8300000, guid: 68107d2d4b437344997ed94a24710b09, type: 3}
   AttackSfx: {fileID: 8300000, guid: 96360621b910eab4da09b546dced8576, type: 3}
   RootedSfx: {fileID: 8300000, guid: 7cc28ceaae5b2cc449674643a3105953, type: 3}

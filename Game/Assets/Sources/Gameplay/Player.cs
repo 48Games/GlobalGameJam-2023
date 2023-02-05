@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
 
     public float FootstepSfxFrequency = 3f;
     public AudioClip[] FootstepSfx;
+    public Vector2 VoiceSfxFrequency = new Vector2(5f,15f);
+    public AudioClip[] VoicesSfx;
     public AudioClip DashSfx;
     public AudioClip AttackSfx;
     public AudioClip RootedSfx;
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
     public AudioClip BuffHugeSfx;
 
     float m_FootstepDistanceCounter;
+    float m_VoiceCounter;
 
 
     [Header("Les trucs de Thomas")]
@@ -170,9 +173,15 @@ public class Player : MonoBehaviour
             m_FootstepDistanceCounter = 0f;
             //AudioSource.PlayOneShot(FootstepSfx[(int)(Random.value*(FootstepSfx.Length -1))]);
         }
-
-        // keep track of distance traveled for footsteps sound
         m_FootstepDistanceCounter += rigidbody.velocity.magnitude * Time.deltaTime;
+
+        // voices sound
+        if (m_VoiceCounter <= 0f)
+        {
+            m_VoiceCounter = Random.Range(VoiceSfxFrequency.x,VoiceSfxFrequency.y);
+            AudioSource.PlayOneShot(VoicesSfx[(int)(Random.value*(VoicesSfx.Length -1))]);
+        }
+        m_VoiceCounter -= Time.deltaTime;
     }
 
     public void Move(InputAction.CallbackContext context)
