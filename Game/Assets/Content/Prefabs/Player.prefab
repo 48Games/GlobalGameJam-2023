@@ -135,6 +135,9 @@ MonoBehaviour:
   - {r: 0.24592285, g: 0.754717, b: 0.17443931, a: 1}
   rootVisualPrefab: {fileID: 3282012445897627456, guid: f7b07aff70bca4e4d95dc7239caa6962, type: 3}
   shootCooldown: 1.5
+  buffspeed: 0
+  buffspeedmultiplier: 1.75
+  buffshoot: 0
   animator: {fileID: 4141263513842363959}
   gameManager: {fileID: 0}
 --- !u!114 &3741847277799669047

@@ -66,6 +66,11 @@ public class Player : MonoBehaviour
     // Spawner
     public Vector3 Spawn { get; set; }
 
+    // Buff
+    public bool buffspeed = false;
+    public float buffspeedmultiplier;
+    public bool buffshoot = false;
+
 
     public int PlayerID { get; private set; }
 
@@ -124,6 +129,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameManager.IsAbleToMove())
+        {
+            currentVelocity = Vector3.zero;
+            rigidbody.velocity = currentVelocity;
+            return;
+        }
+            
+
         if (currentShootCooldown > 0)
         {
             currentShootCooldown -= Time.deltaTime;
@@ -148,6 +161,7 @@ public class Player : MonoBehaviour
         else
         {
             currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * acceleration);
+            if (buffspeed) currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity * buffspeedmultiplier, Time.deltaTime * acceleration);
             if (inDash)
             {
                 dashAnimationPoint += Time.deltaTime;
