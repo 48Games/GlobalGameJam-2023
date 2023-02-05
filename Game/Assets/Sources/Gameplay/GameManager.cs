@@ -140,15 +140,25 @@ public class GameManager : MonoBehaviour
                 winner = player.GetComponent<Player>().PlayerID + 1;
             }
         });
+        bool end = false;
         string text = "";
         if (winner == 0)
         {
             text += "Draw\n\n";
         }
+        
         else
         {
             score[winner - 1] += 1;
-            text += "Player " + (char)('A' + winner - 1) + " won\n\n";
+            if (checkWin(score)) // Check end
+            {
+                end = true;
+                text += "Player " + (char)('A' + winner - 1) + " won the Game !\n\n";
+            }
+            else
+            {
+                text += "Player " + (char)('A' + winner - 1) + " won the round\n\n";
+            }
         }
         text += "Player A : " + new string('*', score[0]) + "\n";
         text += "Player B : " + new string('*', score[1]) + "\n";
@@ -157,8 +167,30 @@ public class GameManager : MonoBehaviour
 
         GameObject.FindGameObjectWithTag("ScoreTxt").transform.GetChild(0).gameObject.SetActive(true);
         GameObject.FindGameObjectWithTag("ScoreTxt").GetComponentInChildren<TextMeshProUGUI>().text = text;
-        state = GameState.POSTGAME;
-        inEnd = false;
+        
+        
+
+        if(!end)
+        {
+            state = GameState.POSTGAME;
+            inEnd = false;
+        }
+        else
+        {
+            state = GameState.QUIT;
+        }
+    }
+
+    private bool checkWin(List<int> score)
+    {
+        for(int i = 0; i < score.Count; i++)
+        {
+            if (score[i] >= 5)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private IEnumerator PostGameCoroutine()
@@ -232,5 +264,6 @@ enum GameState
     RUNNING,
     END,
     POSTGAME,
-    OFF
+    OFF,
+    QUIT
 }
