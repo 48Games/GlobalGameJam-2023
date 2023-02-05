@@ -13,6 +13,11 @@ public class Anvil : MonoBehaviour
         if(other.gameObject.tag == "Player" && active)
         {
             other.gameObject.GetComponent<Player>().Death();
+            if (active)
+            {
+                StartCoroutine(EndCoroutine());
+            }
+            active = false;
         }
         else
         {

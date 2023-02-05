@@ -40,6 +40,12 @@ public class Player : MonoBehaviour
     private Vector3 currentVelocity;
     private Vector3 dashDirection;
 
+    private GameObject visual;
+
+    // Spawner
+    public Vector3 Spawn { get; set; }
+
+
     public int PlayerID { get; private set; }
 
     // Animator
@@ -76,7 +82,7 @@ public class Player : MonoBehaviour
         Rooted = true;
         rigidbody.isKinematic = true;
         animator.SetBool("Rooted", true);
-        var visual = Instantiate(rootVisualPrefab);
+        visual = Instantiate(rootVisualPrefab);
         visual.transform.position = transform.position;
         float progress = 0.0f;
         while (progress < rootDuration)
@@ -90,6 +96,7 @@ public class Player : MonoBehaviour
         animator.SetBool("Rooted", false);
         rigidbody.isKinematic = false;
         Destroy(visual);
+        visual = null;
     }
 
     // Update is called once per frame
@@ -198,6 +205,14 @@ public class Player : MonoBehaviour
 
     public void Death()
     {
+        if(visual != null)
+        {
+            Rooted = false;
+            animator.SetBool("Rooted", false);
+            rigidbody.isKinematic = false;
+            Destroy(visual);
+            visual = null;
+        }
         this.gameObject.SetActive(false);
         gameManager.PlayerDie(this.gameObject);
     }

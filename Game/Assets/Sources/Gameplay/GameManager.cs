@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     public float spawnAnvilMax;
    
     List<GameObject> players = new();
-    List<GameObject> playerDead = new();
     GameState state = GameState.BEGIN;
     private bool spawningAnvil = false;
     private PlayerInputManager playerInputManager = null;
@@ -22,7 +21,18 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InputDevice[] list = Lobby.players;
         playerInputManager = GameObject.FindGameObjectWithTag("inputManager").GetComponent<PlayerInputManager>();
+        for(int i = 0; i < list.Length; i++)
+        {
+            if(list[i] != null)
+            {
+                GameObject player = playerInputManager.JoinPlayer(i, -1, "Gamepad", list[i]).gameObject;
+                player.GetComponent<Player>().SetupPlayer(i);
+                player.GetComponent<Player>().Spawn = new Vector3(spawns[i].transform.position.x, player.transform.position.y, spawns[i].transform.position.z);
+                player.transform.position = player.GetComponent<Player>().Spawn;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -86,9 +96,15 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerDie(GameObject player)
     {
-        playerDead.Add(player);
-        players.Remove(player);
-        if (players.Count <= 1)
+        int count = 0;
+        players.ForEach((player) =>
+        {
+            if(player.active)
+            {
+                count++;
+            }
+        });
+        if (count <= 1)
         {
             if (state == GameState.RUNNING)
                 state = GameState.END;
@@ -98,25 +114,24 @@ public class GameManager : MonoBehaviour
 
     public void NewRound()
     {
-        if(players.Count == 0)
+        int winner = 0;
+        state = GameState.BEGIN;
+        players.ForEach((player) =>
+        {
+            if (player.active)
+            {
+                winner = player.GetComponent<Player>().PlayerID + 1;
+            }
+            player.gameObject.SetActive(true);
+            player.transform.position = player.GetComponent<Player>().Spawn;
+        });
+        if (winner == 0)
         {
             Debug.Log("Draw");
         }
         else
         {
-            Debug.Log("A player won");
-        }
-        state = GameState.BEGIN;
-        playerDead.ForEach((player) =>
-        {
-            players.Add(player);
-            player.gameObject.SetActive(true);
-        });
-        playerDead.Clear();
-        for(int i = 0; i < players.Count; i++)
-        {
-            players[i].SetActive(true);
-            players[i].transform.position = new Vector3(spawns[i].transform.position.x, players[i].transform.position.y, spawns[i].transform.position.z);
+            Debug.Log("A player won: " + winner);
         }
     }
 
@@ -124,14 +139,6 @@ public class GameManager : MonoBehaviour
     {
         players.Add(player);
     }
-
-
-    //public void OnPlayerJoined(PlayerInput playerInput)
-    //{
-    //    playerInput.GetComponent<Player>().SetupPlayer(playerInput.playerIndex);
-    //}
-
-    
 
 }
 

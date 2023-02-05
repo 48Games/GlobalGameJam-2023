@@ -12,7 +12,7 @@ public class Lobby:MonoBehaviour
 {
     public static int MAX_PLAYER = 4;
 
-    static InputDevice[] players = new InputDevice[MAX_PLAYER];
+    public static InputDevice[] players = new InputDevice[MAX_PLAYER];
     static int playernumber = 0;
 
 
