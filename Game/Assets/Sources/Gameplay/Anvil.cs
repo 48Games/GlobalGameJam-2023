@@ -21,6 +21,7 @@ public class Anvil : MonoBehaviour
         }
         else
         {
+            Debug.Log(other.gameObject);
             if (active)
             {
                 StartCoroutine(EndCoroutine());

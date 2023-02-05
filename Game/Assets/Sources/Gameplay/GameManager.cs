@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     GameState state = GameState.BEGIN;
     private bool spawningAnvil = false;
     private PlayerInputManager playerInputManager = null;
+    public GameObject playerObject;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,21 @@ public class GameManager : MonoBehaviour
                 player.GetComponent<Player>().Spawn = new Vector3(spawns[i].transform.position.x, player.transform.position.y, spawns[i].transform.position.z);
                 player.transform.position = player.GetComponent<Player>().Spawn;
             }
+        }
+
+        // For debug
+        if (list[0] == null)
+        {
+            GameObject player = Instantiate(playerObject);
+            int i = 0;
+            player.GetComponent<Player>().SetupPlayer(i);
+            player.GetComponent<Player>().Spawn = new Vector3(spawns[i].transform.position.x, player.transform.position.y, spawns[i].transform.position.z);
+            player.transform.position = player.GetComponent<Player>().Spawn;
+            player = Instantiate(playerObject);
+            i = 1;
+            player.GetComponent<Player>().SetupPlayer(i);
+            player.GetComponent<Player>().Spawn = new Vector3(spawns[i].transform.position.x, player.transform.position.y, spawns[i].transform.position.z);
+            player.transform.position = player.GetComponent<Player>().Spawn;
         }
     }
 

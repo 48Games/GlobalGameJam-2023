@@ -116,8 +116,9 @@ MonoBehaviour:
   - {r: 0.8867924, g: 0.7069621, b: 0.11294055, a: 1}
   - {r: 0.24592285, g: 0.754717, b: 0.17443931, a: 1}
   rootVisualPrefab: {fileID: 3282012445897627456, guid: f7b07aff70bca4e4d95dc7239caa6962, type: 3}
-  shootCooldown: 3
+  shootCooldown: 1.5
   animator: {fileID: 4141263513842363959}
+  gameManager: {fileID: 0}
 --- !u!114 &3741847277799669047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,94 +298,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2994774047107286239, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -79.83775
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994774047107286239, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -107.00598
-      objectReference: {fileID: 0}
-    - target: {fileID: 2994774047107286239, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 168.73483
-      objectReference: {fileID: 0}
-    - target: {fileID: 4424035906902427929, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.9802
-      objectReference: {fileID: 0}
-    - target: {fileID: 6009985335210124077, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 1.3091446
-      objectReference: {fileID: 0}
-    - target: {fileID: 6009985335210124077, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 82.095955
-      objectReference: {fileID: 0}
-    - target: {fileID: 6009985335210124077, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -80.65518
-      objectReference: {fileID: 0}
-    - target: {fileID: 6290076819958218083, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 77.46464
-      objectReference: {fileID: 0}
-    - target: {fileID: 6290076819958218083, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 148.59154
-      objectReference: {fileID: 0}
-    - target: {fileID: 6290076819958218083, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 123.750916
-      objectReference: {fileID: 0}
-    - target: {fileID: 9135129982488358880, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 1.3091446
-      objectReference: {fileID: 0}
-    - target: {fileID: 9135129982488358880, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -82.095955
-      objectReference: {fileID: 0}
-    - target: {fileID: 9135129982488358880, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 80.655174
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2109531025692459906, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
-    - {fileID: 2109531027468175142, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
+    - target: {fileID: 7364066428985894740, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
+      propertyPath: OnShootEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3741847277799669032}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
---- !u!1 &3871355052980446677 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1263231774957068893, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
-  m_PrefabInstance: {fileID: 2611584705549387656}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7364066428985894740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3871355052980446677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bac7f6e8edc3c444a79e4ca313799d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnShootEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3741847277799669032}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: ShootEvent
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &4141263512728687303 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2109531026788685135, guid: b94f1b760b9b10c4e92f00f38c632c37, type: 3}
