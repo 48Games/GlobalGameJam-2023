@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     public Color[] playerColors;
     public GameObject rootVisualPrefab;
 
-    private Vector2 velocity = new Vector2();
     private Rigidbody rigidbody;
 
     // Dash
@@ -41,10 +40,19 @@ public class Player : MonoBehaviour
     private Vector3 currentVelocity;
     private Vector3 dashDirection;
 
+    private GameObject visual;
+
+    // Spawner
+    public Vector3 Spawn { get; set; }
+
+
     public int PlayerID { get; private set; }
 
     // Animator
     [SerializeField] private Animator animator;
+
+    // GameManager
+    [SerializeField] private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +60,8 @@ public class Player : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         Keyframe lastKey = animationCurve[animationCurve.length - 1];
         lastKeyTime = lastKey.time;
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        gameManager.PlayerRegister(this.gameObject);
     }
 
     public void SetupPlayer(int playerID)
@@ -72,7 +82,7 @@ public class Player : MonoBehaviour
         Rooted = true;
         rigidbody.isKinematic = true;
         animator.SetBool("Rooted", true);
-        var visual = Instantiate(rootVisualPrefab);
+        visual = Instantiate(rootVisualPrefab);
         visual.transform.position = transform.position;
         float progress = 0.0f;
         while (progress < rootDuration)
@@ -86,6 +96,7 @@ public class Player : MonoBehaviour
         animator.SetBool("Rooted", false);
         rigidbody.isKinematic = false;
         Destroy(visual);
+        visual = null;
     }
 
     // Update is called once per frame
@@ -192,5 +203,18 @@ public class Player : MonoBehaviour
         s.GetComponent<Shoot>().SetVelocity(transform.forward);
     }
 
+    public void Death()
+    {
+        if(visual != null)
+        {
+            Rooted = false;
+            animator.SetBool("Rooted", false);
+            rigidbody.isKinematic = false;
+            Destroy(visual);
+            visual = null;
+        }
+        this.gameObject.SetActive(false);
+        gameManager.PlayerDie(this.gameObject);
+    }
 
 }

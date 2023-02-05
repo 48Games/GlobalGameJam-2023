@@ -38,4 +38,18 @@ public class Shoot : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        Player p = other.gameObject.GetComponent<Player>();
+        if (p == null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            p.Root();
+            Destroy(gameObject);
+        }
+    }
 }
