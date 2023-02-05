@@ -153,11 +153,11 @@ public class GameManager : MonoBehaviour
             if (checkWin(score)) // Check end
             {
                 end = true;
-                text += "Player " + (char)('A' + winner - 1) + " won the Game !\n\n";
+                text += "Player " + (char)('A' + winner - 1) + " won the Game !\n";
             }
             else
             {
-                text += "Player " + (char)('A' + winner - 1) + " won the round\n\n";
+                text += "Player " + (char)('A' + winner - 1) + " won the round\n";
             }
         }
         text += "Player A : " + new string('*', score[0]) + "\n";
