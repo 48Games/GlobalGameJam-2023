@@ -13,6 +13,7 @@ Game Summary
 * Noé MASSE, *3D Artist*
 * Thomas HERVÉ, *Programmer*
 * François-Xavier GROS, *Programmer & Sound Designer*
+* Maëlig MOREAU, *Game Designer & Sound Designer*
 
 # Documentation
 
