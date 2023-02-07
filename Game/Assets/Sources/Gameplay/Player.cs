@@ -73,6 +73,10 @@ public class Player : MonoBehaviour
     public float buffspeedmultiplier;
     public bool buffshoot = false;
 
+    // Keyboard
+    Plane m_Plane;
+
+
 
     public int PlayerID { get; private set; }
 
@@ -90,6 +94,10 @@ public class Player : MonoBehaviour
         lastKeyTime = lastKey.time;
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         gameManager.PlayerRegister(this.gameObject);
+
+        //Create a new plane with normal (0,0,1) at the position away from the camera you define in the Inspector. This is the plane that you can click so make sure it is reachable.
+        m_Plane = new Plane(Vector3.up, Vector3.zero);
+
     }
 
     public void SetupPlayer(int playerID)
@@ -235,10 +243,34 @@ public class Player : MonoBehaviour
     {
         if(!inDash)
         {
-            Vector2 v = context.ReadValue<Vector2>();
-            if (v != Vector2.zero)
+            Vector3 v = new Vector3(context.ReadValue<Vector2>().x, context.ReadValue<Vector2>().y, 0);
+            if (v != Vector3.zero)
             {
-                transform.forward = new Vector3(v.x, 0, v.y);
+                if(context.control.device.name.Contains("Mouse"))
+                {
+                    Ray ray = Camera.main.ScreenPointToRay(v);
+
+                    //Initialise the enter variable
+                    float enter = 0.0f;
+
+                    if (m_Plane.Raycast(ray, out enter))
+                    {
+                        //Get the point that is clicked
+                        v = ray.GetPoint(enter);
+                        int mul = 1;
+                        if ((v - transform.position).x < 0)
+                        {
+                            mul = -1;
+                        }
+                        float angle = Vector3.Angle((v - transform.position).normalized, new Vector3(0,0,1)) * mul;
+                        Debug.Log((v - transform.position).normalized);
+                        transform.eulerAngles = new Vector3(0, angle, 0);
+                    }
+                }
+                else
+                {
+                    transform.forward = v;
+                }
             }
         }
     }
@@ -282,5 +314,6 @@ public class Player : MonoBehaviour
         deathVfx.GetComponent<DeathFXVisual>().SetColor(characterVisual.Color);
         Destroy(deathVfx, 1.0f);
     }
+
 
 }
