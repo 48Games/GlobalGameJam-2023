@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
         int winner = 0;
         players.ForEach((player) =>
         {
-            if (player.activeInHierarchy)
+            if (player.GetComponent<Player>().Alive)
             {
                 winner = player.GetComponent<Player>().PlayerID + 1;
             }
@@ -211,7 +211,7 @@ public class GameManager : MonoBehaviour
         int count = 0;
         players.ForEach((player) =>
         {
-            if(player.active)
+            if(player.GetComponent<Player>().Alive)
             {
                 count++;
             }
@@ -221,13 +221,6 @@ public class GameManager : MonoBehaviour
             if (state == GameState.RUNNING)
             {
                 state = GameState.END;
-                players.ForEach((player) =>
-                {
-                    if (player.active)
-                    {
-                        player.transform.position = player.GetComponent<Player>().Spawn;
-                    }
-                });
             }
         }
 
@@ -236,15 +229,12 @@ public class GameManager : MonoBehaviour
 
     public void NewRound()
     {
-        Debug.Log("New Round Start");
         GameObject.FindGameObjectWithTag("ScoreTxt").transform.GetChild(0).gameObject.SetActive(false);
 
         players.ForEach((player) =>
         {
-            player.gameObject.SetActive(true);
-            player.transform.position = player.GetComponent<Player>().Spawn;
+            player.GetComponent<Player>().Respawn();
         });
-        Debug.Log("New Round");
 
     }
 

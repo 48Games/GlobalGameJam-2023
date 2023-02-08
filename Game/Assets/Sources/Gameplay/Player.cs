@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     public AnimationCurve animationCurve;
     public float dashCooldown;
     public float rootDuration;
+    public bool Alive { get; private set; }
 
     // Child objects
     public GameObject shoot;
@@ -97,7 +98,7 @@ public class Player : MonoBehaviour
 
         //Create a new plane with normal (0,0,1) at the position away from the camera you define in the Inspector. This is the plane that you can click so make sure it is reachable.
         m_Plane = new Plane(Vector3.up, Vector3.zero);
-
+        Alive = true;
     }
 
     public void SetupPlayer(int playerID)
@@ -125,6 +126,10 @@ public class Player : MonoBehaviour
         while (progress < rootDuration)
         {
             var scale = Mathf.Clamp01(progress * rootDuration / 0.2f);
+            if(rootVisual == null)
+            {
+                yield break;
+            }
             rootVisual.transform.localScale = Vector3.one * scale * 1.5f;
             yield return null;
             progress += Time.deltaTime;
@@ -139,7 +144,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!gameManager.IsAbleToMove())
+        if (!gameManager.IsAbleToMove() || !Alive)
         {
             currentVelocity = Vector3.zero;
             rigidbody.velocity = currentVelocity;
@@ -269,7 +274,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    transform.forward = v;
+                    transform.forward = new Vector3(context.ReadValue<Vector2>().x,0, context.ReadValue<Vector2>().y);
                 }
             }
         }
@@ -304,15 +309,21 @@ public class Player : MonoBehaviour
             Destroy(rootVisual);
             rootVisual = null;
         }
-
+        Alive = false;
         AudioSource.PlayOneShot(DeathSfx);
-        this.gameObject.SetActive(false);
-        gameManager.PlayerDie(this.gameObject);
-
         var deathVfx = Instantiate(deathVFXPrefab);
         deathVfx.transform.position = transform.position;
+        this.transform.position = new Vector3(Spawn.x, -10, Spawn.y);
+        gameManager.PlayerDie(this.gameObject);
+
         deathVfx.GetComponent<DeathFXVisual>().SetColor(characterVisual.Color);
         Destroy(deathVfx, 1.0f);
+    }
+
+    public void Respawn()
+    {
+        Alive = true;
+        transform.position = Spawn;
     }
 
 
