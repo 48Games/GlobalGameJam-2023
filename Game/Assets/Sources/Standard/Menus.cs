@@ -1,41 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Menus : MonoBehaviour
 {
     public AudioClip validationSFX;
     public AudioSource validationSFXSource;
+    public GameObject inputManager;
+    public GameObject launchText;
 
-    private float mouvement = 0;
-    public void SetFront()
+    public void Play()
     {
-        mouvement = -80;
-        gameObject.transform.GetChild(0).gameObject.SetActive(true);
-        gameObject.GetComponentInChildren<Button>()?.Select();
+        Instantiate(inputManager);
         validationSFXSource.PlayOneShot(validationSFX);
+        GameObject.FindGameObjectWithTag("Transition").GetComponent<Transition>().DoTransition(
+                () =>
+                {
+                    GameObject.FindGameObjectWithTag("Menu").transform.GetChild(0).gameObject.SetActive(false);
+                    GameObject.FindGameObjectWithTag("SelectMenu").transform.GetChild(0).gameObject.SetActive(true);
+                }
+            );
     }
 
-    public void SetBack()
+    public void ReturnToMainScreen()
     {
-        mouvement = 80;
-    }
+        Destroy(GameObject.FindGameObjectWithTag("Lobby"));
+        validationSFXSource.PlayOneShot(validationSFX);
+        GameObject.FindGameObjectWithTag("Transition").GetComponent<Transition>().DoTransition(
+                () =>
+                {
 
-    void Update()
-    {
-        if (mouvement != 0)
-        {
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x + mouvement, gameObject.transform.position.y, gameObject.transform.position.z); ;
-            mouvement = (float)(mouvement / 1.1);
-            if (mouvement < 1 && mouvement > -1)
-            {
-                if(mouvement > 0)
-                    gameObject.transform.GetChild(0).gameObject.SetActive(false);
-
-                mouvement = 0;
-            }
-        }
+                    foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+                    {
+                        Destroy(player);
+                    }
+                    GameObject eventSystem = GameObject.FindGameObjectWithTag("EventSystem");
+                    eventSystem.SetActive(false);
+                    eventSystem.SetActive(true);
+                    GameObject.FindGameObjectWithTag("Menu").transform.GetChild(0).gameObject.SetActive(true);
+                    GameObject.FindGameObjectWithTag("SelectMenu").transform.GetChild(0).gameObject.SetActive(false);
+                }
+            );
     }
 
 }

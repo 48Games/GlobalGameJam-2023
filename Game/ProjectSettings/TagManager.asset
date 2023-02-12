@@ -12,6 +12,11 @@ TagManager:
   - inputManager
   - ScoreTxt
   - EventSystem
+  - Canvas
+  - Transition
+  - Menu
+  - SelectMenu
+  - launchText
   layers:
   - Default
   - TransparentFX
