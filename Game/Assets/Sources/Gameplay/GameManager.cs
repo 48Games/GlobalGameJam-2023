@@ -36,26 +36,6 @@ public class GameManager : MonoBehaviour
                 player.transform.position = player.GetComponent<Player>().Spawn;
             }
         }
-
-
-
-        // For debug --------
-        if (list[0] == null)
-        {
-            GameObject player = Instantiate(playerObject);
-            int i = 0;
-            player.GetComponent<Player>().SetupPlayer(i);
-            player.GetComponent<Player>().Spawn = new Vector3(spawns[i].transform.position.x, player.transform.position.y, spawns[i].transform.position.z);
-            player.transform.position = player.GetComponent<Player>().Spawn;
-            player = Instantiate(playerObject);
-            i = 1;
-            player.GetComponent<Player>().SetupPlayer(i);
-            player.GetComponent<Player>().Spawn = new Vector3(spawns[i].transform.position.x, player.transform.position.y, spawns[i].transform.position.z);
-            player.transform.position = player.GetComponent<Player>().Spawn;
-        }
-        // ------------
-
-
     }
 
     // Update is called once per frame

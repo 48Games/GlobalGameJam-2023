@@ -89,7 +89,7 @@ public class Lobby:MonoBehaviour
         }
     }
 
-    private static Vector3 GetPosition(int n)
+    public static Vector3 GetPosition(int n)
     {
         int posX = 2;
         int posY = 1;

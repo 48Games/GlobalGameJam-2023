@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3741847277799669044}
   - component: {fileID: 3741847277799669047}
-  - component: {fileID: 6262618294159955898}
+  - component: {fileID: 5404936945177769536}
   m_Layer: 0
   m_Name: PlayerinLobby
   m_TagString: Player
@@ -129,7 +129,7 @@ MonoBehaviour:
     m_ActionName: UI/Navigate[/SwitchProControllerHID/leftStick/up,/SwitchProControllerHID/rightStick/up,/SwitchProControllerHID/leftStick/down,/SwitchProControllerHID/rightStick/down,/SwitchProControllerHID/leftStick/left,/SwitchProControllerHID/rightStick/left,/SwitchProControllerHID/leftStick/right,/SwitchProControllerHID/rightStick/right,/SwitchProControllerHID/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow,/SwitchProControllerHID/leftStick]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6262618294159955898}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerInLobby, Assembly-CSharp
         m_MethodName: Submit
         m_Mode: 1
@@ -145,7 +145,7 @@ MonoBehaviour:
     m_ActionName: UI/Submit[/Keyboard/enter,/SwitchProControllerHID/buttonEast]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6262618294159955898}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerInLobby, Assembly-CSharp
         m_MethodName: Back
         m_Mode: 0
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &6262618294159955898
+--- !u!114 &5404936945177769536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3741847277799669040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99184a663fa4ec145aab98f21c892f48, type: 3}
+  m_Script: {fileID: 11500000, guid: eb457bcb96db91745a7a8165fb44f63c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerColors:

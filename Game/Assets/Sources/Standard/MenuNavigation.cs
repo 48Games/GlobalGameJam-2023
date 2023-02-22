@@ -22,10 +22,11 @@ public class MenuNavigation : MonoBehaviour
         GameObject selected = EventSystem.current.currentSelectedGameObject;
         if(selected != btn)
         {
-            if(btn != null)
+            if(btn != null && btn.transform.GetChild(0) != null && btn.transform.GetChild(0).GetComponent<TextMeshProUGUI>() != null)
                 btn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.black;
             btn = selected;
-            btn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.white;
+            if (btn != null && btn.transform.GetChild(0) != null && btn.transform.GetChild(0).GetComponent<TextMeshProUGUI>() != null)
+                btn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.white;
             selectionSFXSource.PlayOneShot(selectionSFX);
         }
 

@@ -17,6 +17,9 @@ TagManager:
   - Menu
   - SelectMenu
   - launchText
+  - SelectMenuMultiplayer
+  - HostBtn
+  - Options
   layers:
   - Default
   - TransparentFX
